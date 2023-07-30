@@ -1,0 +1,49 @@
+---
+title: "TP1"
+author: "Romina Violante"
+date: "2023-07-30"
+output: html_document
+---
+
+
+## Trabajo Práctico n°1: 
+
+Para comenzar este TP, se creo un nuevo repositorio público en Github con el nombre " IAUII_TPs". Luego se creo un nuevo proyecto con el nombre "IAUII_TPs" en versión de control para que quede sincronizado con el repositorio creado previamente.
+
+Tras abrir un R Markdown, comienzo con los puntos pedidos en la consigna.
+Primero activo mi librería de tidyverse.
+
+```{r}
+library (tidyverse)
+
+```
+Descargo un archivo de CSV desde el portal de datos abiertos de la ciudad de Buenos Aires (https://data.buenosaires.gob.ar/dataset) y elijo un archivo relacionado a los permisos de uso en el espacio público para calesitas.
+Una vez que tengo mi dataset copiado en la carpeta del proyecto, puedo leerlo utilizando el siguiente chunk:
+
+```{r}
+base <- read.csv("permisos_calesitas.csv",
+                 stringsAsFactors = TRUE,
+                 encoding = "UTF-8")
+```
+
+Al leerlo, agrego un chunck que me muestre algunas de sus características:
+
+```{r}
+dim (base)
+```
+Usando la función dim, descubro que tengo 42 filas y 1 sola columna. Entonces abro la tabla y descubro que no me está separando correctamente las columnas del dataset. Lo corrijo de la siguiente manera:
+
+```{r}
+data<-read.csv("permisos_calesitas.csv", header=T, sep=";", dec=".")
+
+```
+
+La nueva tabla data me muestra la información correctamente. Verifico esto mediante un nuevo dim:
+
+```{r}
+dim(data)
+
+```
+Ahora si puedo ver que mi tabla tiene 42 ingresos y 18 columnas.
+
+
