@@ -21,7 +21,7 @@ Descargo un archivo de CSV desde el portal de datos abiertos de la ciudad de Bue
 Una vez que tengo mi dataset copiado en la carpeta del proyecto, puedo leerlo utilizando el siguiente chunk:
 
 ```{r}
-base <- read.csv("permisos_calesitas.csv",
+base <- read.csv("data/permisos_calesitas.csv",
                  stringsAsFactors = TRUE,
                  encoding = "UTF-8")
 ```
@@ -34,7 +34,7 @@ dim (base)
 Usando la función dim, descubro que tengo 42 filas y 1 sola columna. Entonces abro la tabla y descubro que no me está separando correctamente las columnas del dataset. Lo corrijo de la siguiente manera:
 
 ```{r}
-data<-read.csv("permisos_calesitas.csv", header=T, sep=";", dec=".")
+data<-read.csv("data/permisos_calesitas.csv", header=T, sep=";", dec=".")
 
 ```
 
@@ -44,6 +44,21 @@ La nueva tabla data me muestra la información correctamente. Verifico esto medi
 dim(data)
 
 ```
-Ahora si puedo ver que mi tabla tiene 42 ingresos y 18 columnas.
+Ahora puedo ver que mi tabla tiene 42 ingresos y 18 columnas.
+
+Para conocer un poco más de información sobre su contenido usaré summary()
+
+```{r}
+summary(data)
+```
+Allí puedo ver:
+- Varias columnas vacías como: long, lat, codigo_postal,codigo_postal_argentino, x, x.1
+- tres años con permisos para calesitas: 2018, 2022 y 2023
+- la mayoría de los registros son variables del tipo character
+
+En base a la información encontrada, la pregunta planteada será, ¿cuál es el promedio de permisos pedidos para calesitas en el año 2022?
+
+Para responder esta pregunta primero tendremos que acomodar algunas cosas en la tabla obtenida.
+
 
 
