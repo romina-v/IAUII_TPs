@@ -56,9 +56,38 @@ Allí puedo ver:
 - tres años con permisos para calesitas: 2018, 2022 y 2023
 - la mayoría de los registros son variables del tipo character
 
-En base a la información encontrada, la pregunta planteada será, ¿cuál es el promedio de permisos pedidos para calesitas en el año 2022?
+En base a la información encontrada, la pregunta planteada será, ¿cuál es la comuna con mayor cantidad de permisos otorgados en el año 2022(según año de expediente)?
 
-Para responder esta pregunta primero tendremos que acomodar algunas cosas en la tabla obtenida.
+Para responder esta pregunta primero se deberán acomodar algunas cosas en la tabla obtenida.
 
+Se eliminarán las columnas que están vacías y que no nos aportan información alguna.
 
+```{r}
+Tabla_limpia <- select(data, -long, -lat, -codigo_postal, -codigo_postal_argentino, -X, -X.1)
+```
+
+Con un head() se podrá verificar que quedan únicamente las columnas deseadas
+
+```{r}
+head(Tabla_limpia)
+```
+
+Ahora, será necesario filtrar las filas por año de expediente.
+
+```{r}
+Tabla_filtrada <- filter(Tabla_limpia, anio_expediente=="2022"& tipo_permiso=="OTORGADO")
+```
+
+Una vez que tengo mi tabla filtrada, tendré que ajustar el tipo de variable para poder entender a la comuna como una categoría, de este modo, podré visualizar en un summary cual es la comuna que más se repite por pedidos de permiso.
+Entonces, con un mutate, cambio el tipo de variable de la siguiente manera:
+```{r}
+Tabla_modificada <- mutate(Tabla_filtrada,comuna=as.factor(comuna))
+```
+Y luego, con un summary ya puedo visualizar mi resultado.
+
+```{r}
+summary(Tabla_modificada)
+```
+
+La respuesta a la pregunta planteada será que la comuna 11 y la 13 serán las comunas con mayor cantidad de permisos otorgados en el año 2022, tomando como filtro el año de expediente en el que se inició el pedido.
 
